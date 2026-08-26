@@ -1,0 +1,3 @@
+whoami
+whoami /all
+hostname
