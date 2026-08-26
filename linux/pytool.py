@@ -1,0 +1,1 @@
+print("PURPLETEAM-PYTHON-TEST")

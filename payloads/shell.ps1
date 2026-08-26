@@ -1,0 +1,1 @@
+Write-Output "PURPLETEAM-SHELL-TEST"
