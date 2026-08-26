@@ -6,3 +6,6 @@ systeminfo | findstr /i "domain"
 [Environment]::Is64BitProcess
 (Get-WmiObject Win32_ComputerSystem).Domain
 ipconfig /all
+net localgroup administrators
+Get-MpComputerStatus | Select AMServiceEnabled, RealTimeProtectionEnabled
+Get-Service | Where-Object {$_.DisplayName -match "CrowdStrike|SentinelOne|Defender|Carbon Black|Cortex"}
