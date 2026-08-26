@@ -1,0 +1,3 @@
+purpletest-cert-dat-marker
+This file's content is irrelevant — payload #64 tests certutil.exe as an
+alternative HTTP downloader (T1105), not what the downloaded bytes contain.

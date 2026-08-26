@@ -1,7 +1,23 @@
+<!--
+  Staged file for T1059 test #60 (mshta.exe LOLBin chain, T1218.005).
+  Benign HTA — writes evidence via VBScript FileSystemObject, then closes
+  itself so it doesn't sit open on screen during testing.
+-->
 <html>
 <head>
-<script>
-    alert("mshta.exe successfully executed this HTA");
+<title>purpletest</title>
+<script language="VBScript">
+Sub Window_OnLoad
+    Dim fso, f, logPath
+    logPath = "C:\purpletest\evidence\mshta_run.log"
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set f = fso.OpenTextFile(logPath, 8, True) ' 8 = ForAppending
+    f.WriteLine Now & " | poc.hta executed via mshta.exe on " & CreateObject("WScript.Network").ComputerName
+    f.Close
+    window.close
+End Sub
 </script>
 </head>
+<body>
+</body>
 </html>

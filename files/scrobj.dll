@@ -1,0 +1,26 @@
+<?XML version="1.0"?>
+<!--
+  Staged file for T1059 test #63 (regsvr32.exe /i:URL scrobj.dll —
+  "Squiblydoo", T1218.010). Despite being served under the name
+  "scrobj.dll" (matching the payload's URL), this is actually a plain-text
+  XML scriptlet (.sct format) — regsvr32 fetches it over HTTP and executes
+  the VBScript inside via the legitimate scrobj.dll COM scriptlet host.
+  Benign: only logs execution evidence.
+-->
+<scriptlet>
+<registration
+    progid="PurpleTest.Scriptlet"
+    classid="{10001000-0000-0000-0000-000000000001}">
+    <script language="VBScript">
+    <![CDATA[
+    Function Register()
+        Dim fso, f
+        Set fso = CreateObject("Scripting.FileSystemObject")
+        Set f = fso.OpenTextFile("C:\purpletest\evidence\squiblydoo_run.log", 8, True)
+        f.WriteLine Now & " | scrobj.dll scriptlet executed via regsvr32 (Squiblydoo) on " & CreateObject("WScript.Network").ComputerName
+        f.Close
+    End Function
+    ]]>
+    </script>
+</registration>
+</scriptlet>
